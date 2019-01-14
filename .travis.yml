@@ -1,0 +1,13 @@
+# Grands super user permissions
+sudo: required
+
+# travis ci installs docker into travis container
+services:
+  - docker
+# before tests are ran build docker image
+before_install:
+  - docker build -t dvontrec/docker-react -f Dockerfile.dev .
+
+# commands used to run tests
+scripts:
+  - docker run dvontrec/docker-react npm run test -- --coverage
